@@ -87,7 +87,7 @@ uv sync
 uv run main.py
 ```
 
-실행결과는 `extracted_pii_results.jsonl` 파일과 `extracted_pii_visualization.html` 파일로 저장됩니다.
+실행결과는 `results.jsonl` 파일과 `index.html` 파일로 저장됩니다.
 
 ### Extract 설정 변경
 
