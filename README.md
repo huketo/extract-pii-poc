@@ -113,4 +113,4 @@ result = lx.extract(
 
 설정 조정 전에는 Entities는 **18**개 -> 설정 조정 후에는 Entities는 **21**개로 추출되었습니다.
 
-실행된 보고서는 ![여기](https://huketo.github.io/extract-pii-poc)에서 확인 가능합니다.
+실행된 보고서는 [여기](https://huketo.github.io/extract-pii-poc)에서 확인 가능합니다.
