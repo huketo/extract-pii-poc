@@ -1,0 +1,217 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">Age</span> <span class="lx-label" style="background-color:#C8E6C9;">Bank Account</span> <span class="lx-label" style="background-color:#FEF0C3;">Coordinates</span> <span class="lx-label" style="background-color:#F9DEDC;">Date of Birth</span> <span class="lx-label" style="background-color:#FFDDBE;">Driver&#x27;s License</span> <span class="lx-label" style="background-color:#EADDFF;">Email</span> <span class="lx-label" style="background-color:#C4E9E4;">Event Attendance</span> <span class="lx-label" style="background-color:#FCE4EC;">Event Duration</span> <span class="lx-label" style="background-color:#E8EAED;">Home Address</span> <span class="lx-label" style="background-color:#DDE8E8;">Last Accessed IP</span> <span class="lx-label" style="background-color:#D2E3FC;">Name</span> <span class="lx-label" style="background-color:#C8E6C9;">National ID</span> <span class="lx-label" style="background-color:#FEF0C3;">Online Username</span> <span class="lx-label" style="background-color:#F9DEDC;">Passport Number</span> <span class="lx-label" style="background-color:#FFDDBE;">Personal Website</span> <span class="lx-label" style="background-color:#EADDFF;">Phone Number</span> <span class="lx-label" style="background-color:#C4E9E4;">Ticket Cost</span> <span class="lx-label" style="background-color:#FCE4EC;">Title</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+        **기밀 직원 보고서**
+
+성명: <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#D2E3FC;">Anderson, Michael (김철수)</span>
+직책: <span class="lx-highlight" data-idx="1" style="background-color:#FCE4EC;">선임 데이터 분석가</span> (조직: &#x27;퀀텀 인사이트&#x27;)
+생년월일: <span class="lx-highlight" data-idx="2" style="background-color:#F9DEDC;">1983-05-10</span> (<span class="lx-highlight" data-idx="3" style="background-color:#D2E3FC;">42</span>세)
+
+연락처 정보:
+- 이메일: <span class="lx-highlight" data-idx="4" style="background-color:#EADDFF;">m.anderson@quantum-insight.example.com</span>
+- 휴대전화: <span class="lx-highlight" data-idx="5" style="background-color:#EADDFF;">010-9876-5432</span>
+
+주소 및 위치:
+- 자택: <span class="lx-highlight" data-idx="6" style="background-color:#E8EAED;">대한민국 경기도 고양시 일산동구 중앙로 1275번길 34, 101동 502호 (우편번호: 10403)</span>
+- 좌표: <span class="lx-highlight" data-idx="7" style="background-color:#FEF0C3;">37.6635° N, 126.7781° E</span>
+
+식별 번호:
+- 주민등록번호: <span class="lx-highlight" data-idx="8" style="background-color:#C8E6C9;">830510-1234567</span>
+- 운전면허증: <span class="lx-highlight" data-idx="9" style="background-color:#FFDDBE;">서울12-345678-90</span>
+- 여권 번호: <span class="lx-highlight" data-idx="10" style="background-color:#F9DEDC;">M87654321KOR</span>
+- 은행 계좌: <span class="lx-highlight" data-idx="11" style="background-color:#C8E6C9;">우리은행 1002-345-678901</span>
+
+온라인 활동 기록:
+- 사용자 이름: <span class="lx-highlight" data-idx="12" style="background-color:#FEF0C3;">data_king_77</span>
+- 최근 접속 IP: <span class="lx-highlight" data-idx="13" style="background-color:#DDE8E8;">198.51.100.123 (TEST-NET-2)</span>
+- 개인 웹사이트: <span class="lx-highlight" data-idx="14" style="background-color:#FFDDBE;">https://www.anderson-data-folio.com/profile.html</span>
+
+기타 정보:
+- <span class="lx-highlight" data-idx="15" style="background-color:#C4E9E4;">2025년 9월 15일 오전 10시에 &#x27;서울 AI 서밋 2025&#x27; 이벤트에 참석함.</span>
+- 티켓 구매 비용으로 <span class="lx-highlight" data-idx="16" style="background-color:#C4E9E4;">$150.00</span>를 지불함.
+- 해당 세션은 <span class="lx-highlight" data-idx="17" style="background-color:#FCE4EC;">총 3시간 동안 진행되었음.</span>
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="17" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/18</span> |
+          Pos <span id="posInfo">[19-42]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "Name", "text": "Anderson, Michael (\uae40\ucca0\uc218)", "color": "#D2E3FC", "startPos": 19, "endPos": 42, "beforeText": "**\uae30\ubc00 \uc9c1\uc6d0 \ubcf4\uace0\uc11c**\n\n\uc131\uba85: ", "extractionText": "Anderson, Michael (\uae40\ucca0\uc218)", "afterText": "\n\uc9c1\ucc45: \uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00 (\uc870\uc9c1: &#x27;\ud000\ud140 \uc778\uc0ac\uc774\ud2b8&#x27;)\n\uc0dd\ub144\uc6d4\uc77c: 1983-05-10 (42\uc138)\n\n\uc5f0\ub77d\ucc98 \uc815\ubcf4:\n- \uc774\uba54\uc77c: m.anderson@quantum-insight.example.com\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c", "attributesHtml": "<div><strong>class:</strong> Name</div><div><strong>attributes:</strong> {}</div>"}, {"index": 1, "class": "Title", "text": "\uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00", "color": "#FCE4EC", "startPos": 47, "endPos": 57, "beforeText": "**\uae30\ubc00 \uc9c1\uc6d0 \ubcf4\uace0\uc11c**\n\n\uc131\uba85: Anderson, Michael (\uae40\ucca0\uc218)\n\uc9c1\ucc45: ", "extractionText": "\uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00", "afterText": " (\uc870\uc9c1: &#x27;\ud000\ud140 \uc778\uc0ac\uc774\ud2b8&#x27;)\n\uc0dd\ub144\uc6d4\uc77c: 1983-05-10 (42\uc138)\n\n\uc5f0\ub77d\ucc98 \uc815\ubcf4:\n- \uc774\uba54\uc77c: m.anderson@quantum-insight.example.com\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c", "attributesHtml": "<div><strong>class:</strong> Title</div><div><strong>attributes:</strong> {}</div>"}, {"index": 2, "class": "Date of Birth", "text": "1983-05-10", "color": "#F9DEDC", "startPos": 80, "endPos": 90, "beforeText": "**\uae30\ubc00 \uc9c1\uc6d0 \ubcf4\uace0\uc11c**\n\n\uc131\uba85: Anderson, Michael (\uae40\ucca0\uc218)\n\uc9c1\ucc45: \uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00 (\uc870\uc9c1: &#x27;\ud000\ud140 \uc778\uc0ac\uc774\ud2b8&#x27;)\n\uc0dd\ub144\uc6d4\uc77c: ", "extractionText": "1983-05-10", "afterText": " (42\uc138)\n\n\uc5f0\ub77d\ucc98 \uc815\ubcf4:\n- \uc774\uba54\uc77c: m.anderson@quantum-insight.example.com\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: ", "attributesHtml": "<div><strong>class:</strong> Date of Birth</div><div><strong>attributes:</strong> {}</div>"}, {"index": 3, "class": "Age", "text": "42", "color": "#D2E3FC", "startPos": 92, "endPos": 94, "beforeText": "**\uae30\ubc00 \uc9c1\uc6d0 \ubcf4\uace0\uc11c**\n\n\uc131\uba85: Anderson, Michael (\uae40\ucca0\uc218)\n\uc9c1\ucc45: \uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00 (\uc870\uc9c1: &#x27;\ud000\ud140 \uc778\uc0ac\uc774\ud2b8&#x27;)\n\uc0dd\ub144\uc6d4\uc77c: 1983-05-10 (", "extractionText": "42", "afterText": "\uc138)\n\n\uc5f0\ub77d\ucc98 \uc815\ubcf4:\n- \uc774\uba54\uc77c: m.anderson@quantum-insight.example.com\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 1040", "attributesHtml": "<div><strong>class:</strong> Age</div><div><strong>attributes:</strong> {}</div>"}, {"index": 4, "class": "Email", "text": "m.anderson@quantum-insight.example.com", "color": "#EADDFF", "startPos": 113, "endPos": 151, "beforeText": "**\uae30\ubc00 \uc9c1\uc6d0 \ubcf4\uace0\uc11c**\n\n\uc131\uba85: Anderson, Michael (\uae40\ucca0\uc218)\n\uc9c1\ucc45: \uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00 (\uc870\uc9c1: &#x27;\ud000\ud140 \uc778\uc0ac\uc774\ud2b8&#x27;)\n\uc0dd\ub144\uc6d4\uc77c: 1983-05-10 (42\uc138)\n\n\uc5f0\ub77d\ucc98 \uc815\ubcf4:\n- \uc774\uba54\uc77c: ", "extractionText": "m.anderson@quantum-insight.example.com", "afterText": "\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)\n- \uc88c\ud45c: 37.6635\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510", "attributesHtml": "<div><strong>class:</strong> Email</div><div><strong>attributes:</strong> {}</div>"}, {"index": 5, "class": "Phone Number", "text": "010-9876-5432", "color": "#EADDFF", "startPos": 160, "endPos": 173, "beforeText": "\uc11c**\n\n\uc131\uba85: Anderson, Michael (\uae40\ucca0\uc218)\n\uc9c1\ucc45: \uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00 (\uc870\uc9c1: &#x27;\ud000\ud140 \uc778\uc0ac\uc774\ud2b8&#x27;)\n\uc0dd\ub144\uc6d4\uc77c: 1983-05-10 (42\uc138)\n\n\uc5f0\ub77d\ucc98 \uc815\ubcf4:\n- \uc774\uba54\uc77c: m.anderson@quantum-insight.example.com\n- \ud734\ub300\uc804\ud654: ", "extractionText": "010-9876-5432", "afterText": "\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)\n- \uc88c\ud45c: 37.6635\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812", "attributesHtml": "<div><strong>class:</strong> Phone Number</div><div><strong>attributes:</strong> {}</div>"}, {"index": 6, "class": "Home Address", "text": "\ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)", "color": "#E8EAED", "startPos": 190, "endPos": 246, "beforeText": "\uc218)\n\uc9c1\ucc45: \uc120\uc784 \ub370\uc774\ud130 \ubd84\uc11d\uac00 (\uc870\uc9c1: &#x27;\ud000\ud140 \uc778\uc0ac\uc774\ud2b8&#x27;)\n\uc0dd\ub144\uc6d4\uc77c: 1983-05-10 (42\uc138)\n\n\uc5f0\ub77d\ucc98 \uc815\ubcf4:\n- \uc774\uba54\uc77c: m.anderson@quantum-insight.example.com\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: ", "extractionText": "\ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)", "afterText": "\n- \uc88c\ud45c: 37.6635\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812-345678-90\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d", "attributesHtml": "<div><strong>class:</strong> Home Address</div><div><strong>attributes:</strong> {}</div>"}, {"index": 7, "class": "Coordinates", "text": "37.6635\u00b0 N, 126.7781\u00b0 E", "color": "#FEF0C3", "startPos": 253, "endPos": 276, "beforeText": "\ubcf4:\n- \uc774\uba54\uc77c: m.anderson@quantum-insight.example.com\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)\n- \uc88c\ud45c: ", "extractionText": "37.6635\u00b0 N, 126.7781\u00b0 E", "afterText": "\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812-345678-90\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc ", "attributesHtml": "<div><strong>class:</strong> Coordinates</div><div><strong>attributes:</strong> {}</div>"}, {"index": 8, "class": "National ID", "text": "830510-1234567", "color": "#C8E6C9", "startPos": 295, "endPos": 309, "beforeText": "le.com\n- \ud734\ub300\uc804\ud654: 010-9876-5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)\n- \uc88c\ud45c: 37.6635\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: ", "extractionText": "830510-1234567", "afterText": "\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812-345678-90\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc \uc811\uc18d IP: 198.51.100.123 (TEST-NET-2", "attributesHtml": "<div><strong>class:</strong> National ID</div><div><strong>attributes:</strong> {}</div>"}, {"index": 9, "class": "Driver's License", "text": "\uc11c\uc6b812-345678-90", "color": "#FFDDBE", "startPos": 319, "endPos": 333, "beforeText": "5432\n\n\uc8fc\uc18c \ubc0f \uc704\uce58:\n- \uc790\ud0dd: \ub300\ud55c\ubbfc\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)\n- \uc88c\ud45c: 37.6635\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: ", "extractionText": "\uc11c\uc6b812-345678-90", "afterText": "\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc \uc811\uc18d IP: 198.51.100.123 (TEST-NET-2)\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www", "attributesHtml": "<div><strong>class:</strong> Driver&#x27;s License</div><div><strong>attributes:</strong> {}</div>"}, {"index": 10, "class": "Passport Number", "text": "M87654321KOR", "color": "#F9DEDC", "startPos": 343, "endPos": 355, "beforeText": "\uad6d \uacbd\uae30\ub3c4 \uace0\uc591\uc2dc \uc77c\uc0b0\ub3d9\uad6c \uc911\uc559\ub85c 1275\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)\n- \uc88c\ud45c: 37.6635\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812-345678-90\n- \uc5ec\uad8c \ubc88\ud638: ", "extractionText": "M87654321KOR", "afterText": "\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc \uc811\uc18d IP: 198.51.100.123 (TEST-NET-2)\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www.anderson-data-folio.c", "attributesHtml": "<div><strong>class:</strong> Passport Number</div><div><strong>attributes:</strong> {}</div>"}, {"index": 11, "class": "Bank Account", "text": "\uc6b0\ub9ac\uc740\ud589 1002-345-678901", "color": "#C8E6C9", "startPos": 365, "endPos": 385, "beforeText": "5\ubc88\uae38 34, 101\ub3d9 502\ud638 (\uc6b0\ud3b8\ubc88\ud638: 10403)\n- \uc88c\ud45c: 37.6635\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812-345678-90\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: ", "extractionText": "\uc6b0\ub9ac\uc740\ud589 1002-345-678901", "afterText": "\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc \uc811\uc18d IP: 198.51.100.123 (TEST-NET-2)\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www.anderson-data-folio.com/profile.html\n\n\uae30\ud0c0 \uc815\ubcf4:\n- 2025", "attributesHtml": "<div><strong>class:</strong> Bank Account</div><div><strong>attributes:</strong> {}</div>"}, {"index": 12, "class": "Online Username", "text": "data_king_77", "color": "#FEF0C3", "startPos": 408, "endPos": 420, "beforeText": "35\u00b0 N, 126.7781\u00b0 E\n\n\uc2dd\ubcc4 \ubc88\ud638:\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812-345678-90\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: ", "extractionText": "data_king_77", "afterText": "\n- \ucd5c\uadfc \uc811\uc18d IP: 198.51.100.123 (TEST-NET-2)\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www.anderson-data-folio.com/profile.html\n\n\uae30\ud0c0 \uc815\ubcf4:\n- 2025\ub144 9\uc6d4 15\uc77c \uc624\uc804 10\uc2dc\uc5d0 &#x27;\uc11c\uc6b8 AI \uc11c\ubc0b 2025&#x27; \uc774\ubca4", "attributesHtml": "<div><strong>class:</strong> Online Username</div><div><strong>attributes:</strong> {}</div>"}, {"index": 13, "class": "Last Accessed IP", "text": "198.51.100.123 (TEST-NET-2)", "color": "#DDE8E8", "startPos": 433, "endPos": 460, "beforeText": ":\n- \uc8fc\ubbfc\ub4f1\ub85d\ubc88\ud638: 830510-1234567\n- \uc6b4\uc804\uba74\ud5c8\uc99d: \uc11c\uc6b812-345678-90\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc \uc811\uc18d IP: ", "extractionText": "198.51.100.123 (TEST-NET-2)", "afterText": "\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www.anderson-data-folio.com/profile.html\n\n\uae30\ud0c0 \uc815\ubcf4:\n- 2025\ub144 9\uc6d4 15\uc77c \uc624\uc804 10\uc2dc\uc5d0 &#x27;\uc11c\uc6b8 AI \uc11c\ubc0b 2025&#x27; \uc774\ubca4\ud2b8\uc5d0 \ucc38\uc11d\ud568.\n- \ud2f0\ucf13 \uad6c\ub9e4 \ube44\uc6a9\uc73c\ub85c $150.00\ub97c \uc9c0\ubd88\ud568.\n- \ud574\ub2f9 ", "attributesHtml": "<div><strong>class:</strong> Last Accessed IP</div><div><strong>attributes:</strong> {}</div>"}, {"index": 14, "class": "Personal Website", "text": "https://www.anderson-data-folio.com/profile.html", "color": "#FFDDBE", "startPos": 472, "endPos": 520, "beforeText": "2-345678-90\n- \uc5ec\uad8c \ubc88\ud638: M87654321KOR\n- \uc740\ud589 \uacc4\uc88c: \uc6b0\ub9ac\uc740\ud589 1002-345-678901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc \uc811\uc18d IP: 198.51.100.123 (TEST-NET-2)\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: ", "extractionText": "https://www.anderson-data-folio.com/profile.html", "afterText": "\n\n\uae30\ud0c0 \uc815\ubcf4:\n- 2025\ub144 9\uc6d4 15\uc77c \uc624\uc804 10\uc2dc\uc5d0 &#x27;\uc11c\uc6b8 AI \uc11c\ubc0b 2025&#x27; \uc774\ubca4\ud2b8\uc5d0 \ucc38\uc11d\ud568.\n- \ud2f0\ucf13 \uad6c\ub9e4 \ube44\uc6a9\uc73c\ub85c $150.00\ub97c \uc9c0\ubd88\ud568.\n- \ud574\ub2f9 \uc138\uc158\uc740 \ucd1d 3\uc2dc\uac04 \ub3d9\uc548 \uc9c4\ud589\ub418\uc5c8\uc74c.", "attributesHtml": "<div><strong>class:</strong> Personal Website</div><div><strong>attributes:</strong> {}</div>"}, {"index": 15, "class": "Event Attendance", "text": "2025\ub144 9\uc6d4 15\uc77c \uc624\uc804 10\uc2dc\uc5d0 '\uc11c\uc6b8 AI \uc11c\ubc0b 2025' \uc774\ubca4\ud2b8\uc5d0 \ucc38\uc11d\ud568.", "color": "#C4E9E4", "startPos": 531, "endPos": 577, "beforeText": "8901\n\n\uc628\ub77c\uc778 \ud65c\ub3d9 \uae30\ub85d:\n- \uc0ac\uc6a9\uc790 \uc774\ub984: data_king_77\n- \ucd5c\uadfc \uc811\uc18d IP: 198.51.100.123 (TEST-NET-2)\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www.anderson-data-folio.com/profile.html\n\n\uae30\ud0c0 \uc815\ubcf4:\n- ", "extractionText": "2025\ub144 9\uc6d4 15\uc77c \uc624\uc804 10\uc2dc\uc5d0 &#x27;\uc11c\uc6b8 AI \uc11c\ubc0b 2025&#x27; \uc774\ubca4\ud2b8\uc5d0 \ucc38\uc11d\ud568.", "afterText": "\n- \ud2f0\ucf13 \uad6c\ub9e4 \ube44\uc6a9\uc73c\ub85c $150.00\ub97c \uc9c0\ubd88\ud568.\n- \ud574\ub2f9 \uc138\uc158\uc740 \ucd1d 3\uc2dc\uac04 \ub3d9\uc548 \uc9c4\ud589\ub418\uc5c8\uc74c.", "attributesHtml": "<div><strong>class:</strong> Event Attendance</div><div><strong>attributes:</strong> {}</div>"}, {"index": 16, "class": "Ticket Cost", "text": "$150.00", "color": "#C4E9E4", "startPos": 591, "endPos": 598, "beforeText": "00.123 (TEST-NET-2)\n- \uac1c\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www.anderson-data-folio.com/profile.html\n\n\uae30\ud0c0 \uc815\ubcf4:\n- 2025\ub144 9\uc6d4 15\uc77c \uc624\uc804 10\uc2dc\uc5d0 &#x27;\uc11c\uc6b8 AI \uc11c\ubc0b 2025&#x27; \uc774\ubca4\ud2b8\uc5d0 \ucc38\uc11d\ud568.\n- \ud2f0\ucf13 \uad6c\ub9e4 \ube44\uc6a9\uc73c\ub85c ", "extractionText": "$150.00", "afterText": "\ub97c \uc9c0\ubd88\ud568.\n- \ud574\ub2f9 \uc138\uc158\uc740 \ucd1d 3\uc2dc\uac04 \ub3d9\uc548 \uc9c4\ud589\ub418\uc5c8\uc74c.", "attributesHtml": "<div><strong>class:</strong> Ticket Cost</div><div><strong>attributes:</strong> {}</div>"}, {"index": 17, "class": "Event Duration", "text": "\ucd1d 3\uc2dc\uac04 \ub3d9\uc548 \uc9c4\ud589\ub418\uc5c8\uc74c.", "color": "#FCE4EC", "startPos": 614, "endPos": 629, "beforeText": "\uc778 \uc6f9\uc0ac\uc774\ud2b8: https://www.anderson-data-folio.com/profile.html\n\n\uae30\ud0c0 \uc815\ubcf4:\n- 2025\ub144 9\uc6d4 15\uc77c \uc624\uc804 10\uc2dc\uc5d0 &#x27;\uc11c\uc6b8 AI \uc11c\ubc0b 2025&#x27; \uc774\ubca4\ud2b8\uc5d0 \ucc38\uc11d\ud568.\n- \ud2f0\ucf13 \uad6c\ub9e4 \ube44\uc6a9\uc73c\ub85c $150.00\ub97c \uc9c0\ubd88\ud568.\n- \ud574\ub2f9 \uc138\uc158\uc740 ", "extractionText": "\ucd1d 3\uc2dc\uac04 \ub3d9\uc548 \uc9c4\ud589\ub418\uc5c8\uc74c.", "afterText": "", "attributesHtml": "<div><strong>class:</strong> Event Duration</div><div><strong>attributes:</strong> {}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>

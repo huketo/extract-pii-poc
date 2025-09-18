@@ -1,0 +1,14 @@
+[project]
+name = "extract-pii-poc"
+version = "0.1.0"
+description = "Extract PII from text using langextract(Ollama)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langextract>=1.0.9",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.1",
+]
